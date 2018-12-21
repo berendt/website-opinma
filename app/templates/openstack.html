@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}OpenStack{% endblock %}
+
+{% block content %}
+<p>OpenStack is a free and open-source software platform for cloud computing, mostly deployed as infrastructure-as-a-service (IaaS), whereby virtual servers and other resources are made available to customers. The software platform consists of interrelated components that control diverse, multi-vendor hardware pools of processing, storage, and networking resources throughout a data center. Users either manage it through a web-based dashboard, through command-line tools, or through RESTful web services.</p>
+<p><a href="/ceph/">Ceph</a> can be integrated into OpenStack as a storage backend. OpenStack comes with everything to provide a productive <a href="/kubernetes/">Kubernetes</a> environment..</p>
+{% for tab in tabs %}
+<p><b>{{ tab["name"] }}</b></p>
+<p>{{ tab["prelude"] }}</p>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Name</th>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for category in tab["categories"] %}
+    <tr>
+      <td colspan="3"><b>{{ category["category"] }}</b></td>
+    <tr>
+{% for component in category["components"] %}
+    <tr>
+      <td></td>
+      <td><a href="/openstack/{{ component["name"] }}/">{{ component["name"] }}</a></td>
+      <td>{{ component["title"] }}</td>
+    </tr>
+{% endfor %}
+{% endfor %}
+  </tbody>
+</table>
+{% endfor %}
+<p><small>Parts of the content used are from <a href="https://en.wikipedia.org/wiki/OpenStack">Wikipedia</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>).
+The contents of the tabular lists come from <a href="https://github.com/openstack/openstack-map">openstack/openstack-map</a></small>.</p>
+{% endblock %}
